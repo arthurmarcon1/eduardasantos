@@ -1,0 +1,231 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* ==========================================================================
+   DESIGN TOKENS — Eduarda Santos, Marketing Estratégico
+   Ver /CLAUDE.md na raiz para as regras de uso.
+   Sem dark mode: a marca é fixa (papel + cera), não thematizável.
+   ========================================================================== */
+
+:root {
+  /* -- Fontes (definidas via next/font em layout.tsx) -------------------- */
+  /* --font-bodoni, --font-montserrat, --font-cormorant chegam prontas do
+     next/font como custom properties no <html>; só as referenciamos abaixo. */
+
+  /* -- Paleta de marca (não inventar novas cores além destas) ------------ */
+  --wine: #3b0f1a; /* títulos de destaque, fios, seções invertidas */
+  --wine-hover: #55202d;
+  --cream: #f3efe6; /* fundo padrão */
+  --cream-deep: #e8e2d6; /* superfície sutil */
+  --ink: #2a1e1b; /* texto corrido */
+  /* 0.65 (não 0.62) é o piso real: abaixo disso cai pra 4.38:1 em cima de
+     --cream e 4.18:1 em cima de --cream-deep, furando AA (4.5:1 mínimo
+     pra texto normal). Não reduzir sem checar as duas superfícies. */
+  --ink-muted: rgba(42, 30, 27, 0.65);
+  --hairline: rgba(42, 30, 27, 0.14);
+  --wine-a08: rgba(59, 15, 26, 0.08); /* monograma translúcido do hero */
+
+  /* -- Tokens semânticos shadcn/ui, remapeados para a paleta de marca ---- */
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: var(--cream);
+  --card-foreground: var(--ink);
+  --popover: var(--cream);
+  --popover-foreground: var(--ink);
+  --primary: var(--wine);
+  --primary-foreground: var(--cream);
+  --secondary: var(--cream-deep);
+  --secondary-foreground: var(--ink);
+  --muted: var(--cream-deep);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--cream-deep);
+  --accent-foreground: var(--ink);
+  /* Sem cor de erro própria: reaproveita o vinho em vez de inventar um accent. */
+  --destructive: var(--wine);
+  --destructive-foreground: var(--cream);
+  --border: var(--hairline);
+  --input: var(--hairline);
+  --ring: var(--wine);
+
+  /* -- Raio: 0 em tudo. Única exceção (o selo/lacre) usa rounded-full,
+     que ignora este token por definição. ------------------------------- */
+  --radius: 0rem;
+
+  /* -- Movimento ----------------------------------------------------------
+     Entrada de conteúdo (Framer Motion): fade + translateY(12px), 0.6s,
+     ease [0.16,1,0.3,1], stagger 0.08s, viewport once:true,
+     desligado sob prefers-reduced-motion. Hardcodar estes valores nas
+     variants do Framer; os tokens abaixo servem para transições em CSS
+     puro (hovers, etc.), que são mais rápidas que a entrada de conteúdo. */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-enter: 600ms;
+  --duration-hover: 300ms;
+}
+
+@theme inline {
+  /* -- Fontes -------------------------------------------------------- */
+  --font-sans: var(--font-montserrat); /* utility: corpo, labels, botões */
+  --font-display: var(--font-bodoni); /* display: h1/h2 */
+  --font-accent: var(--font-cormorant); /* accent: itálico, citações curtas */
+
+  /* -- Cores de marca (geram bg-wine, text-cream, border-hairline, etc.) */
+  --color-wine: var(--wine);
+  --color-wine-hover: var(--wine-hover);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-hairline: var(--hairline);
+  --color-wine-a08: var(--wine-a08);
+
+  /* -- Cores semânticas shadcn/ui -------------------------------------- */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* -- Raio (0 em cascata; único uso de rounded-* fora disto é o selo,
+     via rounded-full, que não depende de --radius) --------------------- */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* -- Movimento: aplica o easing/duração editorial como padrão de
+     qualquer utilitário `transition-*` sem precisar escrever duration/ease
+     em cada elemento (hovers). Para a entrada de conteúdo via Framer
+     Motion, os valores corretos são --duration-enter e --ease-editorial,
+     lidos diretamente de :root. -------------------------------------- */
+  --default-transition-duration: var(--duration-hover);
+  --default-transition-timing-function: var(--ease-editorial);
+
+  /* -- Escala tipográfica: 12/14/16/18/24/32/48/72/104px.
+     Os dois maiores são fluidos (clamp) entre 400px e 1440px de viewport. */
+  --text-xs: 0.75rem; /* 12 — eyebrows/labels menores */
+  --text-sm: 0.875rem; /* 14 */
+  --text-base: 1rem; /* 16 — corpo padrão */
+  --text-md: 1.125rem; /* 18 */
+  --text-lg: 1.5rem; /* 24 */
+  --text-xl: 2rem; /* 32 */
+  --text-2xl: 3rem; /* 48 */
+  --text-3xl: clamp(2.75rem, 2.08rem + 2.69vw, 4.5rem); /* 44 → 72 */
+  --text-4xl: clamp(3.5rem, 2.35rem + 4.62vw, 6.5rem); /* 56 → 104 */
+
+  /* -- Tamanhos semânticos extras (fora da progressão xs..4xl) ------------
+     Cada um usado numa única seção, ver CLAUDE.md § Tipografia > Escala. */
+  --text-quote: clamp(
+    2rem,
+    4.5vw,
+    3.5rem
+  ); /* 32 → 56 — citação de destaque ("Entenda o valor") */
+  --text-emphasis: 2.5rem; /* 40 — palavra de destaque nos blocos ("Entenda o valor") */
+
+  /* -- Tracking: a assinatura tipográfica da marca ----------------------
+     Abaixo de 640px todas reduzem para 0.16em (ver regra sem @layer no
+     final deste arquivo) — tracking largo demais quebra a leitura em
+     telas pequenas. */
+  --tracking-tightest: -0.02em; /* display grande (h1/h2 nos tamanhos maiores) */
+  --tracking-label: 0.18em; /* botões e labels maiores (~13px) */
+  --tracking-eyebrow: 0.28em; /* eyebrows/labels menores (~11-12px) */
+  --tracking-nav: 0.2em; /* links do menu desktop do header */
+  --tracking-button-lg: 0.24em; /* CTA grande (WhatsApp) */
+
+  /* -- Leading (corpo de texto) ------------------------------------------ */
+  --leading-body: 1.7;
+
+  /* -- Containers ---------------------------------------------------------
+     max-w-site: largura do container da página (namespace --container-*).
+     max-w-prose: largura máxima de parágrafo corrido (namespace próprio
+     --max-width-prose no Tailwind v4, não --container-*). */
+  --container-site: 73.75rem; /* 1180px */
+  --max-width-prose: 62ch;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ==========================================================================
+   Elemento assinatura — sublinhado caligráfico do hero.
+   stroke-dashoffset via pathLength=1 no SVG; dispara 0.8s após o load.
+   Ver /CLAUDE.md — "Elemento assinatura".
+   ========================================================================== */
+@keyframes draw-underline {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-draw-underline {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-underline 0.8s var(--ease-editorial) 0.8s forwards;
+  }
+}
+
+/* ==========================================================================
+   Tracking largo em telas pequenas — abaixo de 640px, todo o tracking largo
+   do Montserrat (eyebrows, labels, botões, nav) reduz para 0.16em. Em telas
+   pequenas o tracking cheio (0.18–0.28em) força quebra de linha cedo demais
+   e machuca a leitura.
+
+   `@theme inline` do Tailwind v4 inlina o valor de cada token direto na
+   classe utilitária (ex: `.tracking-eyebrow { letter-spacing: 0.28em }`),
+   então uma variável CSS em :root não seria lida em runtime — por isso a
+   regra abaixo mira as classes geradas diretamente. Fica fora de @layer de
+   propósito: CSS sem @layer tem prioridade sobre qualquer estilo em layer
+   (inclusive a layer "utilities" do Tailwind), então isto vence sem
+   precisar de !important nem tocar em cada componente.
+   ========================================================================== */
+@media (max-width: 639px) {
+  .tracking-eyebrow,
+  .tracking-label,
+  .tracking-nav,
+  .tracking-button-lg {
+    letter-spacing: 0.16em;
+  }
+}
+
+/* ==========================================================================
+   Foco visível — regra única e global, de propósito fora de @layer (vence
+   qualquer `outline-none` que apareça num componente, inclusive futuro).
+   Nenhum componente deve remover outline sem repor este contrato: 1px
+   sólido vinho, offset 3px. Em fundo vinho (footer, "Entenda o valor")
+   troca só a cor pra creme — vinho em cima de vinho não se vê.
+   ========================================================================== */
+:focus-visible {
+  outline: 1px solid var(--wine);
+  outline-offset: 3px;
+}
+
+.bg-wine :focus-visible {
+  outline-color: var(--cream);
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 205">
+  <title>Monograma Eduarda Santos</title>
+  <rect x="12" y="12" width="12" height="98" />
+  <rect x="12" y="12" width="46" height="10" />
+  <rect x="12" y="56" width="34" height="8" />
+  <rect x="12" y="102" width="46" height="10" />
+  <path
+    d="M 118,36
+       C 118,15 78,11 61,29
+       C 44,47 68,60 90,78
+       C 114,97 110,118 86,123
+       C 96,143 80,167 52,164
+       C 32,162 28,142 44,129
+       C 55,120 74,121 86,123"
+    fill="none"
+    stroke="#000"
+    stroke-width="6.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
