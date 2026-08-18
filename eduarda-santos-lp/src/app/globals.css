@@ -61,6 +61,19 @@
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-enter: 600ms;
   --duration-hover: 300ms;
+
+  /* -- Header ---------------------------------------------------------
+     Altura real do header fixo, usada pelo próprio header (para ter uma
+     altura previsível) e por qualquer seção que precise compensar o fixed
+     com padding-top (hoje só o Hero). Menor abaixo de 768px porque o
+     header também encolhe (ver media query no fim do arquivo). */
+  --header-h: 88px;
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --header-h: 72px;
+  }
 }
 
 @theme inline {

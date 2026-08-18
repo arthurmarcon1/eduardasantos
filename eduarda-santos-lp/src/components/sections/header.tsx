@@ -47,13 +47,13 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-60 border-b transition-colors",
+          "fixed inset-x-0 top-0 z-50 border-b transition-colors",
           showCreamHeader
             ? "border-hairline bg-cream"
             : "border-transparent bg-transparent",
         )}
       >
-        <div className="mx-auto flex max-w-site items-center justify-between px-6 py-5 md:px-10">
+        <div className="mx-auto flex h-(--header-h) max-w-site items-center justify-between px-6 md:px-10">
           <a
             href="#top"
             aria-label="Eduarda Santos — Marketing Estratégico"
@@ -93,14 +93,14 @@ export function Header() {
 
       <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
         <Dialog.Portal>
-          <Dialog.Popup className="fixed inset-0 z-50 flex flex-col bg-cream">
+          <Dialog.Popup className="fixed inset-0 z-40 flex flex-col bg-cream">
             <Dialog.Title className="sr-only">Menu de navegação</Dialog.Title>
 
-            {/* O fio "Menu"/"Fechar" do header (z-60) fica visível acima deste
-                popup e continua controlando `menuOpen` — não duplicamos o
-                controle aqui. Mantemos um Dialog.Close só-leitor-de-tela para
-                leitores de tela em touch conseguirem fechar (ver docs do
-                Base UI Dialog). */}
+            {/* O fio "Menu"/"Fechar" do header (z-50) fica visível acima deste
+                popup (z-40) e continua controlando `menuOpen` — não
+                duplicamos o controle aqui. Mantemos um Dialog.Close
+                só-leitor-de-tela para leitores de tela em touch conseguirem
+                fechar (ver docs do Base UI Dialog). */}
             <Dialog.Close className="sr-only">Fechar menu</Dialog.Close>
 
             <nav className="flex flex-1 flex-col items-start justify-center gap-8 px-8 pt-20">
