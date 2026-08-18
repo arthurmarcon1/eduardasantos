@@ -2,8 +2,8 @@ import { Monogram } from "@/components/monogram";
 
 const CONTACT_LINKS = [
   {
-    label: "contato@eduardasantos.com.br",
-    href: "mailto:contato@eduardasantos.com.br",
+    label: "eduardasan2207@gmail.com",
+    href: "mailto:eduardasan2207@gmail.com",
     ariaLabel: "Enviar e-mail para Eduarda Santos",
     external: false,
   },

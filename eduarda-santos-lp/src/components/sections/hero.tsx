@@ -41,7 +41,7 @@ export function Hero() {
             Marketing estratégico
           </motion.p>
 
-          <h1 className="mt-6 font-display text-4xl leading-[0.95] tracking-tightest text-ink">
+          <h1 className="mt-6 font-display text-4xl leading-[1.25] tracking-tightest text-ink">
             <motion.span
               variants={item}
               transition={itemTransition}

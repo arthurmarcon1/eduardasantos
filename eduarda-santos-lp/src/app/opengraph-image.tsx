@@ -35,7 +35,7 @@ export default async function Image() {
         fontFamily: "Montserrat",
       }}
     >
-      <img src={monogramSrc} width={140} height={205} alt="" />
+      <img src={monogramSrc} width={175} height={200} alt="" />
 
       <div
         style={{

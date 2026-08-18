@@ -11,7 +11,7 @@ import eduardaPhoto from "@/assets/eduarda.jpg";
 const CLIENTS = ["Moriah", "Grupo 3E", "Chili"];
 
 const clientNameClass =
-  "shrink-0 font-sans text-sm font-light tracking-label text-ink/50 uppercase transition-colors hover:text-ink";
+  "shrink-0 font-sans text-sm font-light tracking-label text-ink uppercase transition-colors hover:text-wine";
 
 function ClientNames() {
   return (

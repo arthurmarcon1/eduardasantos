@@ -1,30 +1,45 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion, type Variants } from "framer-motion";
-import Image from "next/image";
 
 import { EASE, useFadeInStagger } from "@/lib/motion";
-import sealStamp from "@/assets/seal-stamp.png";
 
-// next/image + framer-motion: anima um <Image> otimizado (AVIF/WebP,
-// dimensionado) em vez de <motion.img> com <img> cru.
-const MotionImage = motion.create(Image);
+// motion.create("video") em vez de <motion.video> cru — mesmo padrão do
+// MotionImage que existia aqui antes de virar vídeo.
+const MotionVideo = motion.create("video");
 
 // TODO: substituir pelo número real de WhatsApp da Eduarda antes de publicar.
 const WHATSAPP_URL =
   "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20vim%20do%20site%20e%20quero%20conversar%20sobre%20minha%20marca.";
 
 /**
- * CTA final — sem formulário, contato direto. O lacre é o único elemento
- * circular da página inteira (ver /CLAUDE.md § Layout), reaproveitado do
- * mesmo asset do hero (/public/brand/seal-poster.png), recortado bem perto
- * da borda de cera para caber limpo em 96px.
+ * CTA final — sem formulário, contato direto. O selo é o único elemento
+ * circular da página inteira (ver /CLAUDE.md § Layout): o lockup animado
+ * "EDUARDA SANTOS · MARKETING ESTRATÉGICO" girando ao redor do monograma
+ * (ver /public/brand/cta-seal.webm). Fundo vinho sólido (sem alpha, ao
+ * contrário do lacre do hero) recortado em círculo via `rounded-full`
+ * (112px no mobile, 128px a partir de md) — a própria cor de fundo do
+ * vídeo já é o vinho da marca.
+ *
+ * O crop quadrado do .webm (fonte: "generated_video (2)") foi recentrado
+ * medindo os dois pontos "•" do lockup (marcam 9h/3h do círculo do selo,
+ * sempre na mesma altura do monograma) — não a partir do centro geométrico
+ * do frame original, que ficava ~19px à direita do centro real do selo e
+ * deixava o "ES" visivelmente deslocado dentro do círculo.
  */
 export function CallToAction() {
+  const sealRef = useRef<HTMLVideoElement>(null);
   const { reduceMotion, container, item, itemTransition } = useFadeInStagger(
     0.1,
     0.05,
   );
+
+  // Mesma regra do lacre do hero: sob prefers-reduced-motion, pausa no
+  // frame inicial em vez de deixar a rotação em loop.
+  useEffect(() => {
+    if (reduceMotion) sealRef.current?.pause();
+  }, [reduceMotion]);
 
   // "Carimbada": fade + scale, não o translateY padrão — mas sob
   // prefers-reduced-motion o zoom some e sobra só o fade, mesma regra do
@@ -44,19 +59,25 @@ export function CallToAction() {
         variants={container}
         className="mx-auto max-w-site px-6 py-40 text-center md:px-10"
       >
-        <MotionImage
+        <MotionVideo
+          ref={sealRef}
           variants={seal}
           transition={sealTransition}
-          src={sealStamp}
-          alt=""
+          src="/brand/cta-seal.webm"
+          poster="/brand/cta-seal-poster.png"
           aria-hidden="true"
-          className="mx-auto h-24 w-24 rounded-full"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="mx-auto block h-28 w-28 rounded-full object-cover md:h-32 md:w-32"
         />
 
         <motion.h2
           variants={item}
           transition={itemTransition}
-          className="mx-auto mt-10 max-w-[16ch] font-display text-3xl tracking-tightest text-ink"
+          className="mx-auto mt-10 max-w-[16ch] font-display text-3xl tracking-tightest text-ink md:mt-12"
         >
           Vamos conversar sobre a sua marca.
         </motion.h2>
@@ -91,11 +112,11 @@ export function CallToAction() {
           className="mt-8"
         >
           <a
-            href="mailto:contato@eduardasantos.com.br"
+            href="mailto:eduardasan2207@gmail.com"
             aria-label="Enviar e-mail para Eduarda Santos"
             className="border-b border-wine pb-1 font-sans text-xs font-light tracking-label text-wine uppercase transition-colors hover:border-wine-hover hover:text-wine-hover"
           >
-            contato@eduardasantos.com.br
+            eduardasan2207@gmail.com
           </a>
         </motion.div>
       </motion.div>

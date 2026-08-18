@@ -11,7 +11,7 @@ export function Monogram({ className }: { className?: string }) {
     <span
       aria-hidden="true"
       className={cn(
-        "inline-block aspect-[140/205] bg-current",
+        "inline-block aspect-447/510 bg-current",
         "[mask:url(/brand/monogram.svg)_center/contain_no-repeat]",
         "[-webkit-mask:url(/brand/monogram.svg)_center/contain_no-repeat]",
         className,
