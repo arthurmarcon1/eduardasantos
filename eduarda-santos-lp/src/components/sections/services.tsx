@@ -62,6 +62,15 @@ export function Services() {
   // relevo já estaria pronto na hora que a seção chegasse) e sim play() no
   // primeiro cruzamento do viewport. Sob prefers-reduced-motion nada toca e
   // fica o poster — o carimbo pousado no papel, mesma regra dos outros dois.
+  //
+  // Sobre o ritmo do .webm: no arquivo original o gesto inteiro dura só
+  // 0,45s (o resto são quadros congelados), e passava despercebido. O clipe
+  // publicado recorta a janela útil da fonte (1,0s a 2,75s) e a estica 2,2x,
+  // ficando ~1,7s de carimbo pousado, ~0,9s de descolamento e ~1,1s só de
+  // relevo. Como 2,2x deixaria a fonte de 24fps em ~11fps reais no trecho de
+  // movimento, os quadros intermediários são sintetizados (minterpolate,
+  // saída a 30fps) — com search_param alto, senão a estimativa de movimento
+  // erra o vetor do troquel e rasga a geometria dele em pleno voo.
   const playStamp = useCallback(() => {
     if (reduceMotion) return;
     stampRef.current?.play().catch(() => {
