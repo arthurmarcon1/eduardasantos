@@ -37,7 +37,7 @@ const cormorantGaramond = Cormorant_Garamond({
 const SITE_URL = "https://eduardasantos.com.br"; // TODO: trocar pelo domínio real antes de publicar
 const TITLE = "Eduarda Santos — Marketing Estratégico";
 const DESCRIPTION =
-  "Estratégia, conteúdo e comunicação para marcas que querem ser lembradas, não apenas vistas. Direção de Eduarda Santos.";
+  "Marketing estratégico para marcas e para profissionais que são o próprio negócio: dentistas, médicos, clínicas e consultórios. Direção de Eduarda Santos.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

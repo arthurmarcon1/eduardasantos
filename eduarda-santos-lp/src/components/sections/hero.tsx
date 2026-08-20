@@ -97,16 +97,16 @@ export function Hero() {
                 transition={itemTransition}
                 className="block"
               >
-                Marca não é o que você diz.
+                Marca forte não é sorte.
               </motion.span>
               <motion.span
                 variants={item}
                 transition={itemTransition}
                 className="block"
               >
-                É o que{" "}
+                É{" "}
                 <span className="relative inline-block text-wine">
-                  sobra
+                  estratégia
                   <svg
                     aria-hidden="true"
                     viewBox="0 0 300 40"
@@ -123,8 +123,8 @@ export function Hero() {
                       className="animate-draw-underline"
                     />
                   </svg>
-                </span>{" "}
-                depois.
+                </span>
+                .
               </motion.span>
             </h1>
 
@@ -133,8 +133,8 @@ export function Hero() {
               transition={itemTransition}
               className="mt-6 max-w-prose font-sans text-md font-light text-ink-muted"
             >
-              Estratégia, conteúdo e comunicação para marcas que querem ser
-              lembradas, não apenas vistas.
+              Ajudo marcas e profissionais, como dentistas e médicos, a serem
+              lembrados e escolhidos pelos clientes certos.
             </motion.p>
 
             <motion.div

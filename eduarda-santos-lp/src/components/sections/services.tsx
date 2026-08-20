@@ -1,66 +1,123 @@
 "use client";
 
+import { useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 
 import { useFadeInStagger } from "@/lib/motion";
+
+// Mesmo padrão do selo do CTA: motion.create("video") em vez de
+// <motion.video> cru.
+const MotionVideo = motion.create("video");
 
 const SERVICES = [
   {
     number: "01",
     title: "Estratégia de marca",
     description:
-      "Posicionamento, público e território de comunicação definidos antes de qualquer post.",
+      "Entendo o seu negócio, defino quem você quer atender e o que te diferencia dos outros.",
   },
   {
     number: "02",
-    title: "Criação de campanha",
+    title: "Campanhas",
     description:
-      "Do conceito à peça: ideia central, desdobramentos e calendário.",
+      "Uma ideia central e um plano do que publicar, onde e em que ordem.",
   },
   {
     number: "03",
     title: "Conteúdo",
     description:
-      "Linha editorial, roteiro e produção para redes que sustentam a marca no tempo.",
+      "O que postar e com que frequência, para as redes trabalharem a seu favor.",
   },
   {
     number: "04",
     title: "Comunicação",
     description:
-      "Discurso, tom de voz e materiais que fazem a marca soar como ela mesma.",
+      "Um jeito de falar que é seu, do Instagram ao atendimento no consultório.",
   },
 ];
 
 /**
  * Lista editorial, não grid de cards (proibido pelo CLAUDE.md). A ordem
  * 01→04 é sequencial de verdade: reflete a ordem lógica do trabalho.
+ *
+ * O cabeçalho é assimétrico (texto nas colunas 1–6, chapa nas 8–12, com a
+ * coluna 7 vazia como respiro) e alinhado pela base: o título e a chapa
+ * terminam na mesma linha.
+ *
+ * A chapa é o carimbo ES levantando do papel e deixando o relevo seco
+ * (ver /public/brand/stamp.webm) — o argumento da seção em imagem: o
+ * trabalho é o que fica marcado depois. Terceiro e último objeto da
+ * identidade a aparecer na página, depois do lacre de cera do hero e do
+ * selo giratório do CTA; são três peças distintas do mesmo sistema, não
+ * três repetições do monograma.
  */
 export function Services() {
-  const { container, item, itemTransition } = useFadeInStagger(0.08);
+  const stampRef = useRef<HTMLVideoElement>(null);
+  const { reduceMotion, container, item, itemTransition } =
+    useFadeInStagger(0.08);
+
+  // Diferente dos outros dois vídeos da página, este não é loop: é um gesto
+  // com começo e fim, que precisa acontecer *enquanto* a pessoa olha. Por
+  // isso não usa `autoplay` (que dispararia no load, fora da tela, e o
+  // relevo já estaria pronto na hora que a seção chegasse) e sim play() no
+  // primeiro cruzamento do viewport. Sob prefers-reduced-motion nada toca e
+  // fica o poster — o carimbo pousado no papel, mesma regra dos outros dois.
+  const playStamp = useCallback(() => {
+    if (reduceMotion) return;
+    stampRef.current?.play().catch(() => {
+      // Autoplay bloqueado (ex: modo economia de bateria): o poster já
+      // conta a história sozinho, não há fallback a fazer.
+    });
+  }, [reduceMotion]);
 
   return (
     <section id="servicos" className="bg-cream">
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.6 }}
+        viewport={{ once: true, amount: 0.4 }}
         variants={container}
-        className="mx-auto max-w-site px-6 py-28 md:px-10 md:py-40"
+        className="mx-auto grid max-w-site grid-cols-12 items-end gap-y-14 px-6 py-28 md:gap-x-8 md:px-10 md:py-40"
       >
-        <motion.p
+        <div className="col-span-12 md:col-span-6">
+          <motion.p
+            variants={item}
+            transition={itemTransition}
+            className="font-sans text-xs font-light tracking-eyebrow text-ink-muted uppercase"
+          >
+            Serviços
+          </motion.p>
+          <motion.h2
+            variants={item}
+            transition={itemTransition}
+            className="mt-4 max-w-2xl font-display text-3xl tracking-tightest text-ink"
+          >
+            O que eu faço na prática
+          </motion.h2>
+          <motion.p
+            variants={item}
+            transition={itemTransition}
+            className="mt-5 max-w-prose font-sans text-md font-light text-ink-muted"
+          >
+            Para marcas e para profissionais que são o próprio negócio:
+            dentistas, médicos, clínicas e consultórios.
+          </motion.p>
+        </div>
+
+        <MotionVideo
+          ref={stampRef}
           variants={item}
           transition={itemTransition}
-          className="font-sans text-xs font-light tracking-eyebrow text-ink-muted uppercase"
-        >
-          Serviços
-        </motion.p>
-        <motion.h2
-          variants={item}
-          transition={itemTransition}
-          className="mt-4 max-w-2xl font-display text-3xl tracking-tightest text-ink"
-        >
-          O que eu faço por marcas
-        </motion.h2>
+          onViewportEnter={playStamp}
+          viewport={{ once: true, amount: 0.6 }}
+          src="/brand/stamp.webm"
+          poster="/brand/stamp-poster.jpg"
+          aria-hidden="true"
+          muted
+          playsInline
+          preload="auto"
+          className="col-span-12 block w-full border border-hairline md:col-span-5 md:col-start-8"
+        />
       </motion.div>
 
       <motion.div

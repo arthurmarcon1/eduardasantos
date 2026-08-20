@@ -12,34 +12,34 @@ import { useFadeInStagger } from "@/lib/motion";
 
 const QUESTIONS = [
   {
-    question: "Você trabalha com marcas de qualquer segmento?",
+    question: "Com quem você trabalha?",
     answer:
-      "Trabalho, desde que exista abertura para pensar estratégia antes de pedir peça pronta. Já atendi negócios locais, marcas pessoais e projetos em fase de lançamento.",
+      "Com marcas e com profissionais que são o próprio negócio: dentistas, médicos, clínicas e consultórios, além de lojas e empresas locais. O que eu preciso é de abertura para pensar a estratégia antes de sair postando.",
   },
   {
     question: "Em quanto tempo eu vejo resultado?",
     answer:
-      "Depende do ponto de partida e do formato escolhido. Diagnóstico e posicionamento saem em semanas; construir consistência de marca é processo contínuo, não evento único.",
+      "Depende de onde você está hoje e do formato escolhido. A parte de estratégia fica pronta em algumas semanas. Ser lembrado, esse se constrói com o tempo: não acontece em um post só.",
   },
   {
-    question: "Você faz a parte de design/artes também?",
+    question: "Você faz as artes também?",
     answer:
-      "Meu foco é estratégia, conteúdo e direcionamento. Para a produção final das peças, trabalho com parceiros de design ou oriento a equipe interna da marca, conforme o formato.",
+      "Meu foco é a estratégia e o conteúdo: o que dizer, para quem e quando. Para a arte final, trabalho com parceiros de design ou oriento quem já cuida disso para você.",
   },
   {
     question: "Como funciona o primeiro contato?",
     answer:
-      "Uma conversa inicial para entender seu momento e objetivo. A partir dela, indico o formato mais adequado e alinhamos escopo e valores.",
+      "Uma conversa para eu entender o seu momento e o que você quer alcançar. Depois dela eu indico o formato que faz mais sentido e a gente fecha escopo e valores.",
   },
   {
-    question: "Trabalha remoto?",
+    question: "Você atende à distância?",
     answer:
-      "Sim, atendo remoto em todo o Brasil. Reuniões por vídeo e entregas assíncronas dão conta da maior parte do processo.",
+      "Sim, atendo o Brasil inteiro. As reuniões são por vídeo e as entregas chegam por mensagem ou e-mail, no seu tempo.",
   },
   {
-    question: "Qual o compromisso mínimo no formato continuado?",
+    question: "O plano mensal tem tempo mínimo?",
     answer:
-      "Peço um ciclo mínimo de três meses. É o tempo necessário para a consistência gerar resultado perceptível, não só entregar posts.",
+      "Tem: três meses. É o mínimo para a constância começar a aparecer em resultado, e não só em post publicado.",
   },
 ];
 

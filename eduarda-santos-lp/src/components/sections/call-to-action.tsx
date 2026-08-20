@@ -11,7 +11,7 @@ const MotionVideo = motion.create("video");
 
 // TODO: substituir pelo número real de WhatsApp da Eduarda antes de publicar.
 const WHATSAPP_URL =
-  "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20vim%20do%20site%20e%20quero%20conversar%20sobre%20minha%20marca.";
+  "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20vim%20do%20site%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio.";
 
 /**
  * CTA final — sem formulário, contato direto. O selo é o único elemento
@@ -79,7 +79,7 @@ export function CallToAction() {
           transition={itemTransition}
           className="mx-auto mt-10 max-w-[16ch] font-display text-3xl tracking-tightest text-ink md:mt-12"
         >
-          Vamos conversar sobre a sua marca.
+          Vamos conversar sobre o seu negócio.
         </motion.h2>
 
         <motion.p
@@ -87,7 +87,7 @@ export function CallToAction() {
           transition={itemTransition}
           className="mx-auto mt-5 max-w-prose font-sans text-md font-light text-ink-muted"
         >
-          Me conta em que ponto sua comunicação está. Respondo pessoalmente.
+          Me conta como está a sua comunicação hoje. Eu mesma respondo.
         </motion.p>
 
         <motion.div

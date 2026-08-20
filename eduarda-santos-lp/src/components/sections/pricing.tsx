@@ -7,39 +7,39 @@ import { useFadeInStagger } from "@/lib/motion";
 const FORMATS = [
   {
     name: "Essencial",
-    cadence: "Pontual",
+    cadence: "Uma vez só",
     description:
-      "Para quem precisa de clareza antes de qualquer peça: um ponto de partida sólido pra guiar decisões dali pra frente.",
+      "Para quem quer clareza antes de começar: saber o que dizer, para quem e por quê.",
     deliverables: [
-      "Diagnóstico de marca e mercado",
-      "Posicionamento e proposta de valor",
-      "Território de comunicação",
-      "Guia de comunicação (tom de voz e diretrizes)",
+      "Análise do seu negócio e dos concorrentes",
+      "Definição de quem você atende e do que te diferencia",
+      "Os assuntos que a sua marca vai falar",
+      "Um guia com o seu jeito de falar",
     ],
   },
   {
     name: "Continuado",
-    cadence: "Recorrente",
+    cadence: "Todo mês",
     description:
-      "Para marcas que querem construir consistência mês a mês, sem depender de decisões pontuais.",
+      "Para quem quer aparecer com constância, sem decidir na correria o que postar.",
     deliverables: [
-      "Estratégia de conteúdo mensal",
-      "Calendário editorial",
-      "Acompanhamento de performance",
-      "Ajustes de rota mensais",
+      "Plano de conteúdo do mês",
+      "Calendário do que publicar e quando",
+      "Acompanhamento dos resultados",
+      "Ajustes todo mês, com base no que funcionou",
       "Suporte direto por mensagem",
     ],
   },
   {
     name: "Projeto",
-    cadence: "Escopo fechado",
+    cadence: "Com começo e fim",
     description:
-      "Para campanhas e lançamentos com data marcada: um conceito central que se desdobra em peças.",
+      "Para lançamentos e datas marcadas: uma campanha pensada do começo ao fim.",
     deliverables: [
-      "Conceito criativo central",
-      "Desdobramento de peças",
-      "Cronograma de lançamento",
-      "Acompanhamento da execução",
+      "A ideia central da campanha",
+      "Os materiais que saem dessa ideia",
+      "Cronograma do lançamento",
+      "Acompanhamento até o fim",
     ],
   },
 ];
@@ -82,8 +82,8 @@ export function Pricing() {
           transition={itemTransition}
           className="mt-5 max-w-prose font-sans text-md font-light text-ink-muted"
         >
-          Cada marca tem um momento. Escolhemos o formato e o investimento na
-          conversa.
+          Cada negócio está num momento diferente. A gente escolhe o formato e o
+          valor conversando.
         </motion.p>
       </motion.div>
 

@@ -48,13 +48,20 @@ export function About() {
               Sobre
             </p>
 
-            <div className="mt-8 aspect-3/4 overflow-hidden bg-cream-deep">
+            {/* O retrato entra dessaturado (papel de dossiê) e ganha cor no
+                hover. A lista de filtros do estado final repete as mesmas
+                funções da inicial com valores neutros, em vez de `filter-none`:
+                interpolar entre duas listas iguais garante a transição suave em
+                todos os navegadores. `hover:` do Tailwind v4 já só vale onde o
+                ponteiro suporta hover, então no toque a foto fica no estado
+                dessaturado, sem meio-termo travado. */}
+            <div className="group mt-8 aspect-3/4 overflow-hidden bg-cream-deep">
               <Image
                 src={eduardaPhoto}
                 alt="Retrato de Eduarda Santos"
                 placeholder="blur"
                 sizes="(min-width: 768px) 40vw, 90vw"
-                className="h-full w-full object-cover filter-[grayscale(1)_sepia(0.2)_contrast(1.05)]"
+                className="h-full w-full object-cover filter-[grayscale(1)_sepia(0.2)_contrast(1.05)] transition-[filter] group-hover:filter-[grayscale(0)_sepia(0)_contrast(1)]"
               />
             </div>
           </motion.div>
@@ -70,14 +77,15 @@ export function About() {
             </h2>
 
             <p className="mt-8 max-w-prose font-sans text-base leading-body font-light text-ink">
-              Sou graduanda em Marketing e Comunicação na PUCRS, com foco em
-              marcas que comunicam com intenção: que sabem por que dizem o que
-              dizem antes de decidir como dizer.
+              Sou estudante de Marketing e Comunicação na PUCRS e trabalho com
+              marketing estratégico. Atendo marcas e também profissionais que
+              são o próprio negócio: dentistas, médicos, clínicas e
+              consultórios.
             </p>
             <p className="mt-5 max-w-prose font-sans text-base leading-body font-light text-ink">
-              Acredito em estratégia antes de execução. Cada peça nasce de um
-              raciocínio claro, unindo criatividade e propósito comercial para
-              gerar resultado, não apenas estética.
+              Antes de pensar no post, eu entendo o seu negócio e quem você quer
+              atender. Só depois a comunicação começa. Com criatividade, sim,
+              mas sempre mirando resultado.
             </p>
 
             <div className="mt-10 flex items-center justify-end gap-4">
@@ -103,7 +111,7 @@ export function About() {
               transition={itemTransition}
               className="shrink-0 font-sans text-xs font-light tracking-eyebrow text-ink-muted uppercase md:w-56"
             >
-              Marcas com quem já trabalhei
+              Quem já confiou no meu trabalho
             </motion.p>
 
             <motion.div

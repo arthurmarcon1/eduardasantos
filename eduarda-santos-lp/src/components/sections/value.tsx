@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { useFadeInStagger } from "@/lib/motion";
 
 const BLOCKS = [
-  { word: "Diagnóstico", label: "Antes de qualquer peça" },
-  { word: "Consistência", label: "O que constrói memória" },
-  { word: "Resultado", label: "O que justifica o investimento" },
+  { word: "Clareza", label: "Antes de começar a postar" },
+  { word: "Consistência", label: "O que faz lembrarem de você" },
+  { word: "Resultado", label: "O que traz cliente novo" },
 ];
 
 /**
@@ -40,7 +40,7 @@ export function Value() {
           transition={itemTransition}
           className="mx-auto mt-8 max-w-[24ch] font-display text-quote leading-[1.15] text-cream"
         >
-          Design bonito atrai. Estratégia é o que faz voltar.
+          Post bonito chama atenção. Estratégia traz cliente.
         </motion.blockquote>
 
         <motion.span
