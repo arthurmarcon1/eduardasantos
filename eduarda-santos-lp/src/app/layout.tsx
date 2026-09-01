@@ -34,7 +34,20 @@ const cormorantGaramond = Cormorant_Garamond({
   preload: false,
 });
 
-const SITE_URL = "https://eduardasantos.com.br"; // TODO: trocar pelo domínio real antes de publicar
+// Domínio usado pelo metadataBase (URLs absolutas de OG e canonical).
+// Resolvido em build, nesta ordem:
+//   1. NEXT_PUBLIC_SITE_URL — fixa o domínio na mão, se precisar;
+//   2. VERCEL_PROJECT_PRODUCTION_URL — o domínio de produção do projeto na
+//      Vercel. Vem preenchido de graça e passa a valer o domínio próprio
+//      sozinho, assim que ele for ligado lá;
+//   3. localhost, para o dev.
+// Com isso o deploy sobe com OG correto sem hardcodar domínio no código.
+const VERCEL_PRODUCTION_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (VERCEL_PRODUCTION_URL
+    ? `https://${VERCEL_PRODUCTION_URL}`
+    : "http://localhost:3000");
 const TITLE = "Eduarda Santos — Marketing Estratégico";
 const DESCRIPTION =
   "Marketing estratégico para marcas e para profissionais que são o próprio negócio: dentistas, médicos, clínicas e consultórios. Direção de Eduarda Santos.";
