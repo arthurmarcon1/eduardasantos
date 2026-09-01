@@ -12,6 +12,7 @@ import { useFadeInStagger } from "@/lib/motion";
  */
 export function Hero() {
   const sealRef = useRef<HTMLVideoElement>(null);
+  const sealMobileRef = useRef<HTMLVideoElement>(null);
   const [sealReady, setSealReady] = useState(false);
   const { reduceMotion, container, item, itemTransition } = useFadeInStagger(
     0.08,
@@ -22,7 +23,9 @@ export function Hero() {
   // deixá-lo girando em loop — `autoplay` do <video> não reage a mudanças
   // de prop após já ter iniciado, então paramos via ref.
   useEffect(() => {
-    if (reduceMotion) sealRef.current?.pause();
+    if (!reduceMotion) return;
+    sealRef.current?.pause();
+    sealMobileRef.current?.pause();
   }, [reduceMotion]);
 
   // Fade-in do lacre: `loadeddata`/`readyState` só garantem que o vídeo tem
@@ -152,6 +155,45 @@ export function Hero() {
               </a>
             </motion.div>
           </motion.div>
+
+          {/* Lacre no mobile (<768px). Existe separado do bloco desktop logo
+              abaixo porque o formato do arquivo precisa ser outro: o
+              seal.webm é VP9 com canal alfa, e o Safari do iOS não suporta
+              alfa em WebM — no iPhone ele simplesmente não renderiza. Aqui
+              vai um H.264 sem alfa, que toca em iOS e Android, com o fundo
+              do papel (--paper, #E9E3DA) embutido no próprio vídeo no lugar
+              da transparência.
+
+              O retângulo do vídeo não aparece porque esse fundo embutido é
+              exatamente a cor média do papel: medido bloco a bloco no
+              tamanho do lacre, a textura local nunca se afasta mais de 0.78
+              nível do valor usado, e o decode do H.264 devolve a cor com 0
+              de variação interna. Se algum dia o --paper mudar, este vídeo
+              precisa ser regerado junto, senão o retângulo passa a aparecer.
+
+              Sem drop-shadow de propósito: a sombra do desktop depende do
+              alfa para seguir o contorno do lacre; sobre um vídeo opaco ela
+              viraria a sombra de um retângulo.
+
+              `poster` cobre o Modo de Baixo Consumo do iOS, que bloqueia
+              autoplay de vídeo — nesse caso fica o lacre parado em vez de um
+              buraco no layout. */}
+          <div
+            aria-hidden="true"
+            className="flex w-full justify-center md:hidden"
+          >
+            <video
+              ref={sealMobileRef}
+              className="w-[132px]"
+              src="/brand/seal-mobile.mp4"
+              poster="/brand/seal-mobile-poster.webp"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+            />
+          </div>
 
           <div
             aria-hidden="true"
