@@ -56,11 +56,18 @@ export function CallToAction() {
         variants={container}
         className="mx-auto max-w-site px-6 py-40 text-center md:px-10"
       >
+        {/* MP4 na frente, WebM atrás. O Safari do iOS não toca WebM de
+            forma confiável — é ele que deixava este vídeo parado no poster
+            no iPhone em vez de rodar. Com o MP4 primeiro, todo navegador
+            escolhe um formato que sabe decodificar, e o WebM fica de
+            reserva. Aqui a troca é indolor porque este vídeo não tem alfa
+            (fundo vinho sólido, recortado em círculo pelo rounded-full): o H.264 é equivalente ao VP9, não um plano B pior — ao
+            contrário do lacre do hero, que depende de alfa e por isso
+            precisou de um arquivo separado só pro mobile. */}
         <MotionVideo
           ref={sealRef}
           variants={seal}
           transition={sealTransition}
-          src="/brand/cta-seal.webm"
           poster="/brand/cta-seal-poster.png"
           aria-hidden="true"
           autoPlay
@@ -69,7 +76,10 @@ export function CallToAction() {
           playsInline
           preload="auto"
           className="mx-auto block h-28 w-28 rounded-full object-cover md:h-32 md:w-32"
-        />
+        >
+          <source src="/brand/cta-seal.mp4" type="video/mp4" />
+          <source src="/brand/cta-seal.webm" type="video/webm" />
+        </MotionVideo>
 
         <motion.h2
           variants={item}
@@ -84,9 +94,8 @@ export function CallToAction() {
           transition={itemTransition}
           className="mx-auto mt-5 max-w-prose font-sans text-md font-light text-ink-muted"
         >
-          Seja um negócio, uma empresa ou você mesmo como profissional,
-          podemos encontrar uma forma mais estratégica de comunicar o que
-          você faz.
+          Seja um negócio, uma empresa ou você mesmo como profissional, podemos
+          encontrar uma forma mais estratégica de comunicar o que você faz.
         </motion.p>
 
         <motion.div

@@ -116,20 +116,30 @@ export function Services() {
           </motion.p>
         </div>
 
+        {/* MP4 na frente, WebM atrás. O Safari do iOS não toca WebM de
+            forma confiável — é ele que deixava este vídeo parado no poster
+            no iPhone em vez de rodar. Com o MP4 primeiro, todo navegador
+            escolhe um formato que sabe decodificar, e o WebM fica de
+            reserva. Aqui a troca é indolor porque este vídeo não tem alfa
+            (quadro retangular opaco, com o fio de 1px por borda): o H.264 é equivalente ao VP9, não um plano B pior — ao
+            contrário do lacre do hero, que depende de alfa e por isso
+            precisou de um arquivo separado só pro mobile. */}
         <MotionVideo
           ref={stampRef}
           variants={item}
           transition={itemTransition}
           onViewportEnter={playStamp}
           viewport={{ once: true, amount: 0.6 }}
-          src="/brand/stamp.webm"
           poster="/brand/stamp-poster.jpg"
           aria-hidden="true"
           muted
           playsInline
           preload="auto"
           className="col-span-12 block w-full border border-hairline md:col-span-5 md:col-start-8"
-        />
+        >
+          <source src="/brand/stamp.mp4" type="video/mp4" />
+          <source src="/brand/stamp.webm" type="video/webm" />
+        </MotionVideo>
       </motion.div>
 
       <motion.div
