@@ -47,7 +47,7 @@ export function Faq() {
   const { container, item: fadeItem, itemTransition } = useFadeInStagger(0.08);
 
   return (
-    <section id="duvidas" className="bg-cream">
+    <section id="duvidas">
       <motion.div
         initial="hidden"
         whileInView="visible"

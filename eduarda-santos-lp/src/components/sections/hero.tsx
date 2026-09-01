@@ -71,10 +71,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section
-      id="top"
-      className="relative overflow-hidden bg-cream pt-(--header-h)"
-    >
+    <section id="top" className="relative overflow-hidden pt-(--header-h)">
       <div className="relative z-1 mx-auto flex min-h-[calc(100svh-var(--header-h))] max-w-site items-center px-6 py-16 md:px-10 md:py-0">
         <div className="flex w-full flex-col items-center gap-y-16 md:flex-row md:gap-x-10 md:gap-y-0">
           <motion.div

@@ -45,14 +45,41 @@ Paleta fechada — não inventar accent novo. Implementada em `:root` de
 | ------------ | -------------------- | -------------------------------------------- |
 | `wine`       | `#3B0F1A`            | Títulos de destaque, fios, seções invertidas |
 | `wine-hover` | `#55202D`            | Estado hover de elementos em `wine`          |
-| `cream`      | `#F3EFE6`            | Fundo padrão da página                       |
+| `cream`      | `#F3EFE6`            | Base do véu do papel, texto sobre vinho      |
 | `cream-deep` | `#E8E2D6`            | Superfície sutil (nunca cartão com sombra)   |
+| `paper`      | `#E9E3DA`            | Equivalente chapado do papel (ver Fundo)     |
 | `ink`        | `#2A1E1B`            | Texto corrido                                |
 | `ink-muted`  | `rgba(42,30,27,.62)` | Texto secundário, legendas                   |
 | `hairline`   | `rgba(42,30,27,.14)` | Fios/separadores/bordas de 1px               |
 
 **Regra de composição:** no máximo **2 seções** da página usam fundo vinho
-cheio (`bg-wine`). O vinho é pontuação, não base — a base é sempre `cream`.
+cheio (`bg-wine`). O vinho é pontuação, não base — a base é sempre o papel.
+
+### Fundo
+
+A base da página é uma **textura de papel**, não uma cor chapada:
+`/public/brand/paper-texture.webp` sob um véu de `cream` a 70%
+(`--paper-veil`). Ela é pintada **uma vez só**, por uma camada fixa do
+tamanho da viewport (`body::before` em [globals.css](src/app/globals.css)),
+com `cover`/`center`/`no-repeat` — nunca deforma, nunca repete e não muda
+de escala conforme a página cresce.
+
+O véu não é decoração: a textura crua tem média `#D3C8BF` e derruba o
+`--ink-muted` para 4.08:1, abaixo do mínimo AA. Com o véu a base vira
+`#E9E3DA` e o contraste volta a 4.59:1. **Não reduzir os 70% abaixo de 60%
+sem refazer essa conta.**
+
+Consequência prática para seções novas: **não pôr fundo claro opaco em
+nada**, senão a textura some por baixo. Uma seção normal não declara fundo.
+Fundo opaco só onde ele é funcional:
+
+- `bg-wine` — as duas seções invertidas.
+- `bg-paper` — superfícies opacas presas à viewport que não a cobrem
+  inteira (header scrollado, link "pular para o conteúdo"): a textura ali
+  cairia num recorte desalinhado, e chapado é indistinguível a olho.
+- `paper-texture` — superfícies opacas que cobrem a viewport **inteira**
+  (menu full-screen do mobile): como a caixa é a viewport, o recorte bate
+  com o da camada de fundo e a superfície fica contínua com a página.
 
 Não existe cor de erro/destrutiva própria: o token semântico `destructive`
 do shadcn/ui foi remapeado para `wine` em vez de inventar um vermelho novo.

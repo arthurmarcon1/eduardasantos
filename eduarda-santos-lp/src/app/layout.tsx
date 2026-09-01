@@ -71,7 +71,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <a
           href="#main-content"
-          className="sr-only border border-wine bg-cream px-6 py-3 font-sans text-xs font-light tracking-label text-wine uppercase focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100"
+          className="sr-only border border-wine bg-paper px-6 py-3 font-sans text-xs font-light tracking-label text-wine uppercase focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-100"
         >
           Pular para o conteúdo
         </a>

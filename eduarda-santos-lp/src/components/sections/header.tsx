@@ -49,7 +49,7 @@ export function Header() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 border-b transition-colors",
           showCreamHeader
-            ? "border-hairline bg-cream"
+            ? "border-hairline bg-paper"
             : "border-transparent bg-transparent",
         )}
       >
@@ -93,7 +93,7 @@ export function Header() {
 
       <Dialog.Root open={menuOpen} onOpenChange={setMenuOpen}>
         <Dialog.Portal>
-          <Dialog.Popup className="fixed inset-0 z-40 flex flex-col bg-cream">
+          <Dialog.Popup className="fixed inset-0 z-40 flex flex-col paper-texture">
             <Dialog.Title className="sr-only">Menu de navegação</Dialog.Title>
 
             {/* O fio "Menu"/"Fechar" do header (z-50) fica visível acima deste
