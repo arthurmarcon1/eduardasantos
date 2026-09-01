@@ -32,7 +32,7 @@ export function Pricing() {
   const { container, item, itemTransition } = useFadeInStagger(0.08);
 
   return (
-    <section id="trabalho" className="bg-cream">
+    <section id="trabalho">
       <motion.div
         initial="hidden"
         whileInView="visible"

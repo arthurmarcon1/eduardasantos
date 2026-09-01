@@ -48,7 +48,7 @@ export function CallToAction() {
   const sealTransition = { duration: 0.5, ease: EASE };
 
   return (
-    <section id="contato" className="bg-cream">
+    <section id="contato">
       <motion.div
         initial="hidden"
         whileInView="visible"

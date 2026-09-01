@@ -29,7 +29,7 @@ export function About() {
   const { container, item, itemTransition } = useFadeInStagger(0.1);
 
   return (
-    <section id="sobre" className="bg-cream">
+    <section id="sobre">
       <div className="mx-auto max-w-site px-6 py-28 md:px-10 md:py-40">
         <motion.div
           initial="hidden"

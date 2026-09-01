@@ -84,7 +84,7 @@ export function Services() {
   }, [reduceMotion]);
 
   return (
-    <section id="servicos" className="bg-cream">
+    <section id="servicos">
       <motion.div
         initial="hidden"
         whileInView="visible"

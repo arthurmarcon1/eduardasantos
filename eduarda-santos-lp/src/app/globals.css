@@ -26,6 +26,33 @@
   --hairline: rgba(42, 30, 27, 0.14);
   --wine-a08: rgba(59, 15, 26, 0.08); /* monograma translúcido do hero */
 
+  /* -- Papel: a textura de fundo da página ------------------------------
+     Arquivo em /public/brand/paper-texture.webp (1672x941, gerado do PNG
+     original sem recorte nem correção de cor). A média do arquivo é
+     #D3C8BF: mais escuro que --cream e escuro o bastante para derrubar o
+     --ink-muted para 4.08:1, abaixo do mínimo AA de 4.5:1 (ver a nota do
+     --ink-muted acima). Por isso a textura nunca entra crua — sempre com
+     o véu creme por cima.
+
+     --paper-veil: creme a 70% sobre a textura. Devolve a base ao
+     território da marca (resultado ~#E9E3DA, praticamente o
+     --cream-deep), recupera o AA (--ink-muted volta a 4.59:1 e --ink fica
+     em 12.70:1) e deixa passar só o grão — que é o efeito procurado:
+     papel, não uma foto colada atrás do site. Esse 70% é um número de
+     contraste, não de gosto: abaixo de 60% o --ink-muted fura AA de novo.
+
+     --paper: o equivalente chapado do resultado acima. Serve de cor de
+     canvas (área de overscroll) e de fundo das superfícies opacas presas
+     à viewport que não a cobrem inteira, onde a textura cairia num
+     recorte desalinhado — hoje o header quando scrollado e o link "pular
+     para o conteúdo". Com o grão já reduzido pelo véu, chapado e
+     texturizado são indistinguíveis a olho nesses tamanhos. */
+  --paper-veil: color-mix(in srgb, var(--cream) 70%, transparent);
+  --paper: #e9e3da;
+  --paper-image:
+    linear-gradient(var(--paper-veil), var(--paper-veil)),
+    url("/brand/paper-texture.webp");
+
   /* -- Tokens semânticos shadcn/ui, remapeados para a paleta de marca ---- */
   --background: var(--cream);
   --foreground: var(--ink);
@@ -87,6 +114,7 @@
   --color-wine-hover: var(--wine-hover);
   --color-cream: var(--cream);
   --color-cream-deep: var(--cream-deep);
+  --color-paper: var(--paper);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-hairline: var(--hairline);
@@ -177,12 +205,72 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+  /* O fundo da página não mora mais aqui: quem pinta é a camada fixa
+     body::before (logo abaixo). O <html> guarda só a cor chapada — o
+     browser a propaga para o canvas, então ela cobre também a área de
+     overscroll (rubber band do iOS/macOS), que fica fora do alcance de
+     qualquer elemento. O body precisa ficar transparente, senão tapa a
+     camada. --background/--card/--popover continuam apontando para
+     --cream: seguem sendo o contrato de cor de superfície do shadcn/ui,
+     só não são mais pintados no body. */
   html {
     @apply font-sans;
+    background-color: var(--paper);
   }
+  body {
+    @apply text-foreground;
+    background-color: transparent;
+  }
+}
+
+/* ==========================================================================
+   Papel — a textura de fundo da página.
+
+   Uma única camada fixa cobrindo a viewport, atrás de tudo. É um elemento
+   `position: fixed` e não um `background-attachment: fixed` no <html> por
+   dois motivos: o attachment fixo é historicamente quebrado e/ou travado
+   no Safari do iOS, e a camada fixa é a versão barata para o compositor.
+   Por ser `position: fixed` ela sai do fluxo e portanto NÃO vira flex item
+   do body (que é `flex min-h-full flex-col`) — o layout não sente.
+
+   `cover` + `center` fazem a textura preencher qualquer proporção sem
+   deformar e sem repetir: em 16:9 (Full HD, 2K, 4K) ela encosta nos quatro
+   lados; em ultrawide sobra altura e o corte é vertical; em retrato de
+   celular sobra largura e o corte é horizontal. Em nenhum caso sobra
+   borda. Como a camada é do tamanho da viewport (e não do documento), a
+   escala não depende do comprimento da página.
+
+   z-index -1 põe a camada atrás do conteúdo e à frente do
+   background-color do <html>. Em troca, qualquer fundo opaco no caminho
+   tapa a textura — é por isso que as sections da página não usam mais
+   `bg-cream`. Daqui pra frente fundo opaco só onde ele é funcional: as
+   duas seções vinho e as superfícies que precisam esconder o conteúdo
+   rolando por baixo.
+   ========================================================================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--paper-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* A mesma textura para superfície opaca que cobre a viewport inteira —
+   hoje só o menu full-screen do mobile, que precisa ser opaco para esconder
+   a página atrás. Como ele é `fixed inset-0`, a caixa é exatamente a
+   viewport e o cover/center daqui resulta no mesmo recorte da camada
+   acima: o menu fica contínuo com o fundo da página em vez de virar um
+   retângulo de textura remontada. */
+@utility paper-texture {
+  background-color: var(--paper);
+  background-image: var(--paper-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* ==========================================================================
