@@ -1,4 +1,5 @@
 import { Monogram } from "@/components/monogram";
+import { Signature } from "@/components/signature";
 
 const CONTACT_LINKS = [
   {
@@ -56,9 +57,12 @@ export function Footer() {
       </div>
 
       <div className="border-t border-cream/10">
-        <p className="mx-auto max-w-site px-6 py-6 text-center font-sans text-xs font-light text-cream/60 md:px-10">
-          © 2026 Eduarda Santos. Todos os direitos reservados.
-        </p>
+        <div className="mx-auto max-w-site px-6 py-6 text-center md:px-10">
+          <p className="font-sans text-xs font-light text-cream/60">
+            © 2026 Eduarda Santos. Todos os direitos reservados.
+          </p>
+          <Signature />
+        </div>
       </div>
     </footer>
   );
