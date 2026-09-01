@@ -77,15 +77,28 @@ export function About() {
             </h2>
 
             <p className="mt-8 max-w-prose font-sans text-base leading-body font-light text-ink">
-              Sou estudante de Marketing e Comunicação na PUCRS e trabalho com
-              marketing estratégico. Atendo marcas e também profissionais que
-              são o próprio negócio: dentistas, médicos, clínicas e
-              consultórios.
+              Estudo Marketing e Comunicação na PUCRS e trabalho com marketing
+              estratégico para marcas, negócios e profissionais que querem
+              construir uma presença mais forte no digital.
             </p>
             <p className="mt-5 max-w-prose font-sans text-base leading-body font-light text-ink">
-              Antes de pensar no post, eu entendo o seu negócio e quem você quer
-              atender. Só depois a comunicação começa. Com criatividade, sim,
-              mas sempre mirando resultado.
+              Sempre gostei de transformar ideias em algo que pudesse ser
+              visto, entendido e lembrado. Foi no marketing que encontrei uma
+              forma de unir essa criatividade com estratégia e propósito.
+            </p>
+            <p className="mt-5 max-w-prose font-sans text-base leading-body font-light text-ink">
+              Gosto de entender o que existe por trás de cada marca: o
+              negócio, público e o que ela quer comunicar. A partir disso,
+              transformo ideias em estratégias, conteúdos e campanhas que
+              fazem sentido para cada realidade.
+            </p>
+            <p className="mt-5 max-w-prose font-accent text-lg text-wine italic">
+              Antes de pensar no que postar, eu penso no porquê.
+            </p>
+            <p className="mt-5 max-w-prose font-sans text-base leading-body font-light text-ink">
+              Porque acredito que uma boa comunicação não precisa ser
+              complicada. Ela precisa ser clara, ter propósito e fazer
+              sentido para quem está do outro lado.
             </p>
 
             <div className="mt-10 flex items-center justify-end gap-4">

@@ -4,14 +4,11 @@ import { useEffect, useRef } from "react";
 import { motion, type Variants } from "framer-motion";
 
 import { EASE, useFadeInStagger } from "@/lib/motion";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 // motion.create("video") em vez de <motion.video> cru — mesmo padrão do
 // MotionImage que existia aqui antes de virar vídeo.
 const MotionVideo = motion.create("video");
-
-// TODO: substituir pelo número real de WhatsApp da Eduarda antes de publicar.
-const WHATSAPP_URL =
-  "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20vim%20do%20site%20e%20quero%20conversar%20sobre%20o%20meu%20neg%C3%B3cio.";
 
 /**
  * CTA final — sem formulário, contato direto. O selo é o único elemento
@@ -79,7 +76,7 @@ export function CallToAction() {
           transition={itemTransition}
           className="mx-auto mt-10 max-w-[16ch] font-display text-3xl tracking-tightest text-ink md:mt-12"
         >
-          Vamos conversar sobre o seu negócio.
+          Vamos tirar sua marca do automático?
         </motion.h2>
 
         <motion.p
@@ -87,7 +84,9 @@ export function CallToAction() {
           transition={itemTransition}
           className="mx-auto mt-5 max-w-prose font-sans text-md font-light text-ink-muted"
         >
-          Me conta como está a sua comunicação hoje. Eu mesma respondo.
+          Seja um negócio, uma empresa ou você mesmo como profissional,
+          podemos encontrar uma forma mais estratégica de comunicar o que
+          você faz.
         </motion.p>
 
         <motion.div
@@ -102,7 +101,7 @@ export function CallToAction() {
             aria-label="Chamar Eduarda Santos no WhatsApp (abre em nova aba)"
             className="inline-block bg-wine px-12 py-5 font-sans text-xs font-light tracking-button-lg text-cream uppercase transition-colors hover:bg-wine-hover"
           >
-            Chamar no WhatsApp
+            Vamos conversar →
           </a>
         </motion.div>
 

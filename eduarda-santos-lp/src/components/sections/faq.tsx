@@ -14,32 +14,27 @@ const QUESTIONS = [
   {
     question: "Com quem você trabalha?",
     answer:
-      "Com marcas e com profissionais que são o próprio negócio: dentistas, médicos, clínicas e consultórios, além de lojas e empresas locais. O que eu preciso é de abertura para pensar a estratégia antes de sair postando.",
-  },
-  {
-    question: "Em quanto tempo eu vejo resultado?",
-    answer:
-      "Depende de onde você está hoje e do formato escolhido. A parte de estratégia fica pronta em algumas semanas. Ser lembrado, esse se constrói com o tempo: não acontece em um post só.",
-  },
-  {
-    question: "Você faz as artes também?",
-    answer:
-      "Meu foco é a estratégia e o conteúdo: o que dizer, para quem e quando. Para a arte final, trabalho com parceiros de design ou oriento quem já cuida disso para você.",
-  },
-  {
-    question: "Como funciona o primeiro contato?",
-    answer:
-      "Uma conversa para eu entender o seu momento e o que você quer alcançar. Depois dela eu indico o formato que faz mais sentido e a gente fecha escopo e valores.",
+      "Trabalho com marcas, negócios e profissionais que querem construir uma presença mais estratégica no digital. Isso inclui empresas, marcas pessoais e profissionais como dentistas, médicos, especialistas, clínicas e consultórios.",
   },
   {
     question: "Você atende à distância?",
     answer:
-      "Sim, atendo o Brasil inteiro. As reuniões são por vídeo e as entregas chegam por mensagem ou e-mail, no seu tempo.",
+      "Sim. Posso atender projetos de qualquer lugar, com reuniões e acompanhamento realizados online.",
   },
   {
-    question: "O plano mensal tem tempo mínimo?",
+    question: "Você também cria os conteúdos?",
     answer:
-      "Tem: três meses. É o mínimo para a constância começar a aparecer em resultado, e não só em post publicado.",
+      "Sim. Dependendo do projeto, meu trabalho pode envolver planejamento, criação de conteúdos, roteiros, direção criativa, campanhas e gestão das redes sociais.",
+  },
+  {
+    question: "Eu preciso saber exatamente o que quero contratar?",
+    answer:
+      "Não. Você me conta sobre a sua marca, o momento em que está e onde quer chegar. A partir disso, podemos entender juntos qual formato de trabalho faz mais sentido.",
+  },
+  {
+    question: "Como funciona o primeiro contato?",
+    answer:
+      "Começamos com uma conversa para entender melhor seu negócio, seus objetivos e suas necessidades. Depois disso, preparo uma proposta pensada para o seu momento.",
   },
 ];
 
@@ -67,8 +62,15 @@ export function Faq() {
           transition={itemTransition}
           className="mt-4 font-display text-3xl tracking-tightest text-ink"
         >
-          Antes de me chamar
+          Ficou com alguma dúvida?
         </motion.h2>
+        <motion.p
+          variants={fadeItem}
+          transition={itemTransition}
+          className="mt-5 max-w-prose font-sans text-md font-light text-ink-muted"
+        >
+          Talvez a sua dúvida já esteja respondida aqui.
+        </motion.p>
 
         <Accordion className="mt-16" defaultValue={[QUESTIONS[0].question]}>
           {QUESTIONS.map((entry) => (

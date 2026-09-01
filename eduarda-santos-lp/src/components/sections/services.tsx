@@ -12,27 +12,31 @@ const MotionVideo = motion.create("video");
 const SERVICES = [
   {
     number: "01",
-    title: "Estratégia de marca",
+    title: "Estratégia",
+    opener: "Antes de criar, eu entendo.",
     description:
-      "Entendo o seu negócio, defino quem você quer atender e o que te diferencia dos outros.",
+      "Analiso o negócio, o público e os objetivos para definir um caminho claro para a comunicação da marca.",
   },
   {
     number: "02",
-    title: "Campanhas",
+    title: "Redes sociais",
+    opener: "Presença também precisa de planejamento.",
     description:
-      "Uma ideia central e um plano do que publicar, onde e em que ordem.",
+      "Planejo e organizo a comunicação das redes sociais para que a marca esteja presente de forma estratégica, consistente e alinhada aos seus objetivos.",
   },
   {
     number: "03",
-    title: "Conteúdo",
+    title: "Conteúdo & criatividade",
+    opener: "Ideias que fazem sentido para a sua marca.",
     description:
-      "O que postar e com que frequência, para as redes trabalharem a seu favor.",
+      "Crio conteúdos, roteiros e ideias que informam, conectam e ajudam a marca a ser lembrada.",
   },
   {
     number: "04",
-    title: "Comunicação",
+    title: "Campanhas & posicionamento",
+    opener: "Da ideia à comunicação.",
     description:
-      "Um jeito de falar que é seu, do Instagram ao atendimento no consultório.",
+      "Desenvolvo conceitos e campanhas e ajudo marcas e profissionais a comunicarem melhor quem são, o que fazem e o que os torna diferentes.",
   },
 ];
 
@@ -108,8 +112,7 @@ export function Services() {
             transition={itemTransition}
             className="mt-5 max-w-prose font-sans text-md font-light text-ink-muted"
           >
-            Para marcas e para profissionais que são o próprio negócio:
-            dentistas, médicos, clínicas e consultórios.
+            Para marcas e para profissionais que são o próprio negócio.
           </motion.p>
         </div>
 
@@ -151,9 +154,14 @@ export function Services() {
                 <h3 className="font-display text-xl text-ink transition-colors duration-400 group-hover:text-cream md:col-span-4">
                   {service.title}
                 </h3>
-                <p className="col-span-2 max-w-md font-sans text-base font-light text-ink-muted transition-colors duration-400 group-hover:text-cream md:col-span-7 md:col-start-6">
-                  {service.description}
-                </p>
+                <div className="col-span-2 md:col-span-7 md:col-start-6">
+                  <p className="font-accent text-md text-wine italic transition-colors duration-400 group-hover:text-cream">
+                    {service.opener}
+                  </p>
+                  <p className="mt-3 max-w-md font-sans text-base font-light text-ink-muted transition-colors duration-400 group-hover:text-cream">
+                    {service.description}
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>

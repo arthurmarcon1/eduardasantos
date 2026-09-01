@@ -2,6 +2,7 @@ import { About } from "@/components/sections/about";
 import { CallToAction } from "@/components/sections/call-to-action";
 import { Faq } from "@/components/sections/faq";
 import { Hero } from "@/components/sections/hero";
+import { Needs } from "@/components/sections/needs";
 import { Pricing } from "@/components/sections/pricing";
 import { Services } from "@/components/sections/services";
 import { Value } from "@/components/sections/value";
@@ -19,6 +20,7 @@ export default function Home() {
       <About />
       <Services />
       <Pricing />
+      <Needs />
       <Faq />
       <CallToAction />
     </>

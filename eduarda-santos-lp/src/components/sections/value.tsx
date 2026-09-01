@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { useFadeInStagger } from "@/lib/motion";
 
 const BLOCKS = [
-  { word: "Clareza", label: "Antes de começar a postar" },
-  { word: "Consistência", label: "O que faz lembrarem de você" },
-  { word: "Resultado", label: "O que traz cliente novo" },
+  { word: "Clareza", label: "Saber o que dizer e para quem." },
+  { word: "Estratégia", label: "Entender por que cada conteúdo existe." },
+  { word: "Resultado", label: "Fazer a comunicação trabalhar pelo negócio." },
 ];
 
 /**
@@ -40,8 +40,18 @@ export function Value() {
           transition={itemTransition}
           className="mx-auto mt-8 max-w-[24ch] font-display text-quote leading-[1.15] text-cream"
         >
-          Post bonito chama atenção. Estratégia traz cliente.
+          Post bonito chama atenção.
+          <br />
+          Estratégia traz cliente.
         </motion.blockquote>
+
+        <motion.p
+          variants={item}
+          transition={itemTransition}
+          className="mx-auto mt-6 max-w-prose font-sans text-md font-light text-cream/80"
+        >
+          Não é sobre postar mais. É sobre comunicar melhor.
+        </motion.p>
 
         <motion.span
           aria-hidden="true"
