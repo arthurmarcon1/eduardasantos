@@ -14,7 +14,7 @@ const QUESTIONS = [
   {
     question: "Com quem você trabalha?",
     answer:
-      "Trabalho com marcas, negócios e profissionais que querem construir uma presença mais estratégica no digital. Isso inclui empresas, marcas pessoais e profissionais como dentistas, médicos, especialistas, clínicas e consultórios.",
+      "Trabalho com marcas, negócios e profissionais que querem construir uma presença mais estratégica no digital. Isso inclui empresas, marcas pessoais e profissionais que são o próprio negócio.",
   },
   {
     question: "Você atende à distância?",
