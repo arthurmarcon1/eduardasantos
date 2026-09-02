@@ -84,7 +84,7 @@ export function CallToAction() {
         <motion.h2
           variants={item}
           transition={itemTransition}
-          className="mx-auto mt-10 max-w-[16ch] font-display text-3xl tracking-tightest text-ink md:mt-12"
+          className="mx-auto mt-10 max-w-[16ch] font-display text-3xl tracking-tightest text-wine-bright md:mt-12"
         >
           Vamos tirar sua marca do automático?
         </motion.h2>

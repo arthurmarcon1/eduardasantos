@@ -41,19 +41,29 @@ Paleta fechada — não inventar accent novo. Implementada em `:root` de
 [globals.css](src/app/globals.css) e exposta como utilitários Tailwind
 (`bg-wine`, `text-ink-muted`, `border-hairline`, etc).
 
-| Token        | Valor                | Uso                                          |
-| ------------ | -------------------- | -------------------------------------------- |
-| `wine`       | `#3B0F1A`            | Títulos de destaque, fios, seções invertidas |
-| `wine-hover` | `#55202D`            | Estado hover de elementos em `wine`          |
-| `cream`      | `#F3EFE6`            | Base do véu do papel, texto sobre vinho      |
-| `cream-deep` | `#E8E2D6`            | Superfície sutil (nunca cartão com sombra)   |
-| `paper`      | `#E9E3DA`            | Equivalente chapado do papel (ver Fundo)     |
-| `ink`        | `#2A1E1B`            | Texto corrido                                |
-| `ink-muted`  | `rgba(42,30,27,.62)` | Texto secundário, legendas                   |
-| `hairline`   | `rgba(42,30,27,.14)` | Fios/separadores/bordas de 1px               |
+| Token         | Valor                | Uso                                             |
+| ------------- | -------------------- | ----------------------------------------------- |
+| `wine`        | `#3B0F1A`            | Fios, botões, seções invertidas                 |
+| `wine-bright` | `#86293C`            | Palavras em destaque (títulos display + accent) |
+| `wine-hover`  | `#55202D`            | Estado hover de elementos em `wine`             |
+| `cream`       | `#F3EFE6`            | Base do véu do papel, texto sobre vinho         |
+| `cream-deep`  | `#E8E2D6`            | Superfície sutil (nunca cartão com sombra)      |
+| `paper`       | `#E9E3DA`            | Equivalente chapado do papel (ver Fundo)        |
+| `ink`         | `#2A1E1B`            | Texto corrido                                   |
+| `ink-muted`   | `rgba(42,30,27,.62)` | Texto secundário, legendas                      |
+| `hairline`    | `rgba(42,30,27,.14)` | Fios/separadores/bordas de 1px                  |
 
 **Regra de composição:** no máximo **2 seções** da página usam fundo vinho
 cheio (`bg-wine`). O vinho é pontuação, não base — a base é sempre o papel.
+
+**`wine` e `wine-bright` não são intercambiáveis.** O `wine` é cor de
+superfície e de fio: funciona cheio (fundo, botão, borda), onde o contraste
+é com o creme por cima. Como _texto_ ao lado do `ink` ele falha, porque os
+dois têm praticamente a mesma luminosidade — 1.02:1 entre si — e o leitor vê
+dois pretos, não duas cores. Toda palavra em destaque escrita em vinho usa
+`wine-bright`, que fica 1.84:1 acima do `ink` e ainda faz 6.87:1 contra o
+papel. Regra prática: **vinho como fundo é `wine`, vinho como palavra é
+`wine-bright`.**
 
 ### Fundo
 

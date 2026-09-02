@@ -105,7 +105,7 @@ export function Hero() {
                 className="block"
               >
                 É{" "}
-                <span className="relative inline-block text-wine">
+                <span className="relative inline-block text-wine-bright">
                   estratégia
                   <svg
                     aria-hidden="true"
@@ -133,7 +133,8 @@ export function Hero() {
               transition={itemTransition}
               className="mt-6 max-w-prose font-sans text-md font-light text-ink-muted"
             >
-              Estratégia, conteúdo e criatividade para marcas, negócios e profissionais que querem se posicionar e crescer no digital.
+              Estratégia, conteúdo e criatividade para marcas, negócios e
+              profissionais que querem se posicionar e crescer no digital.
             </motion.p>
 
             <motion.div

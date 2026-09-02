@@ -43,7 +43,7 @@ export function Pricing() {
         <motion.h2
           variants={item}
           transition={itemTransition}
-          className="font-display text-3xl tracking-tightest text-ink"
+          className="font-display text-3xl tracking-tightest text-wine-bright"
         >
           Como podemos trabalhar juntos
         </motion.h2>
@@ -53,8 +53,8 @@ export function Pricing() {
           className="mt-5 max-w-prose font-sans text-md font-light text-ink-muted"
         >
           Você não precisa saber exatamente do que precisa. Me conta sobre sua
-          marca, seu momento e onde quer chegar. A partir disso, encontramos
-          o formato de trabalho que faz mais sentido para você.
+          marca, seu momento e onde quer chegar. A partir disso, encontramos o
+          formato de trabalho que faz mais sentido para você.
         </motion.p>
       </motion.div>
 
@@ -74,7 +74,7 @@ export function Pricing() {
           >
             <div className="mx-auto max-w-site px-6 md:px-10">
               <div className="grid grid-cols-1 gap-x-8 gap-y-3 py-10 md:grid-cols-12">
-                <h3 className="font-display text-xl text-ink md:col-span-4">
+                <h3 className="font-display text-xl text-wine-bright md:col-span-4">
                   {format.label}
                 </h3>
                 <p className="max-w-prose font-sans text-base font-light text-ink-muted md:col-span-7 md:col-start-6">
@@ -100,7 +100,11 @@ export function Pricing() {
         >
           Cada trabalho é adaptado às necessidades da marca.
         </motion.p>
-        <motion.div variants={item} transition={itemTransition} className="mt-8">
+        <motion.div
+          variants={item}
+          transition={itemTransition}
+          className="mt-8"
+        >
           <a
             href={WHATSAPP_URL}
             target="_blank"

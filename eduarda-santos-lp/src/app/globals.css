@@ -14,8 +14,16 @@
      next/font como custom properties no <html>; só as referenciamos abaixo. */
 
   /* -- Paleta de marca (não inventar novas cores além destas) ------------ */
-  --wine: #3b0f1a; /* títulos de destaque, fios, seções invertidas */
+  --wine: #3b0f1a; /* fios, botões, seções invertidas */
   --wine-hover: #55202d;
+  /* Vinho aberto, para as palavras em destaque (títulos display e as linhas
+     de accent em itálico). O --wine chapado não serve nesse papel: contra o
+     --ink ele rende 1.02:1 de contraste, ou seja, tem praticamente a mesma
+     luminosidade do texto preto ao lado e não é lido como cor nenhuma — só
+     como um preto levemente diferente. Este é 1.84:1 contra o --ink, o que
+     já separa as duas famílias a olho, e ainda faz 6.87:1 contra o papel
+     (folgado para AA, inclusive em texto normal). */
+  --wine-bright: #86293c;
   --cream: #f3efe6; /* fundo padrão */
   --cream-deep: #e8e2d6; /* superfície sutil */
   --ink: #2a1e1b; /* texto corrido */
@@ -112,6 +120,7 @@
   /* -- Cores de marca (geram bg-wine, text-cream, border-hairline, etc.) */
   --color-wine: var(--wine);
   --color-wine-hover: var(--wine-hover);
+  --color-wine-bright: var(--wine-bright);
   --color-cream: var(--cream);
   --color-cream-deep: var(--cream-deep);
   --color-paper: var(--paper);

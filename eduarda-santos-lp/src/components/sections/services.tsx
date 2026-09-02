@@ -1,13 +1,11 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
+import { AlphaMatteVideo } from "@/components/alpha-matte-video";
 import { useFadeInStagger } from "@/lib/motion";
-
-// Mesmo padrão do selo do CTA: motion.create("video") em vez de
-// <motion.video> cru.
-const MotionVideo = motion.create("video");
 
 const SERVICES = [
   {
@@ -56,18 +54,17 @@ const SERVICES = [
  * três repetições do monograma.
  */
 export function Services() {
-  const stampRef = useRef<HTMLVideoElement>(null);
+  const [stampPlaying, setStampPlaying] = useState(false);
   const { reduceMotion, container, item, itemTransition } =
     useFadeInStagger(0.08);
 
   // Diferente dos outros dois vídeos da página, este não é loop: é um gesto
   // com começo e fim, que precisa acontecer *enquanto* a pessoa olha. Por
-  // isso não usa `autoplay` (que dispararia no load, fora da tela, e o
-  // relevo já estaria pronto na hora que a seção chegasse) e sim play() no
-  // primeiro cruzamento do viewport. Sob prefers-reduced-motion nada toca e
-  // fica o poster — o carimbo pousado no papel, mesma regra dos outros dois.
+  // isso não toca no load (fora da tela o relevo já estaria pronto quando a
+  // seção chegasse) e sim no primeiro cruzamento do viewport. Sob
+  // prefers-reduced-motion nada toca e fica o still do relevo.
   //
-  // Sobre o ritmo do .webm: no arquivo original o gesto inteiro dura só
+  // Sobre o ritmo do clipe: no arquivo original o gesto inteiro dura só
   // 0,45s (o resto são quadros congelados), e passava despercebido. O clipe
   // publicado recorta a janela útil da fonte (1,0s a 2,75s) e a estica 2,2x,
   // ficando ~1,7s de carimbo pousado, ~0,9s de descolamento e ~1,1s só de
@@ -75,13 +72,6 @@ export function Services() {
   // movimento, os quadros intermediários são sintetizados (minterpolate,
   // saída a 30fps) — com search_param alto, senão a estimativa de movimento
   // erra o vetor do troquel e rasga a geometria dele em pleno voo.
-  const playStamp = useCallback(() => {
-    if (reduceMotion) return;
-    stampRef.current?.play().catch(() => {
-      // Autoplay bloqueado (ex: modo economia de bateria): o poster já
-      // conta a história sozinho, não há fallback a fazer.
-    });
-  }, [reduceMotion]);
 
   return (
     <section id="servicos">
@@ -103,7 +93,7 @@ export function Services() {
           <motion.h2
             variants={item}
             transition={itemTransition}
-            className="mt-4 max-w-2xl font-display text-3xl tracking-tightest text-ink"
+            className="mt-4 max-w-2xl font-display text-3xl tracking-tightest text-wine-bright"
           >
             O que eu faço na prática
           </motion.h2>
@@ -116,30 +106,55 @@ export function Services() {
           </motion.p>
         </div>
 
-        {/* MP4 na frente, WebM atrás. O Safari do iOS não toca WebM de
-            forma confiável — é ele que deixava este vídeo parado no poster
-            no iPhone em vez de rodar. Com o MP4 primeiro, todo navegador
-            escolhe um formato que sabe decodificar, e o WebM fica de
-            reserva. Aqui a troca é indolor porque este vídeo não tem alfa
-            (quadro retangular opaco, com o fio de 1px por borda): o H.264 é equivalente ao VP9, não um plano B pior — ao
-            contrário do lacre do hero, que depende de alfa e por isso
-            precisou de um arquivo separado só pro mobile. */}
-        <MotionVideo
-          ref={stampRef}
+        {/* A chapa não é mais um retângulo de papel com fio em volta: o
+            clipe agora tem alfa real, e o troquel e o relevo pousam direto
+            na textura da página (ver /src/components/alpha-matte-video.tsx
+            para o formato — matte empacotado, um H.264 com o dobro da
+            altura, cor em cima e máscara embaixo).
+
+            A transparência não veio de recorte: aqui o "fundo" é o próprio
+            papel em que o relevo é gravado, então cortá-lo apagaria o
+            relevo. O alfa é um matte por diferença contra uma chapa de
+            iluminação estimada quadro a quadro — sobra só o que se afasta
+            do papel liso (o troquel, a sombra, o relevo), e o gradiente de
+            luz que o vídeo trazia embutido sai junto. Por isso o tom nunca
+            briga com o --paper do site.
+
+            Uma ressalva de enquadramento: o troquel e a sombra dele encostam
+            nas quatro bordas do quadro, então durante os ~2,6s de descolagem
+            a sombra termina na borda do vídeo. Em repouso — que é o estado
+            que fica na tela — o relevo flutua sem nenhuma borda. */}
+        <motion.div
           variants={item}
           transition={itemTransition}
-          onViewportEnter={playStamp}
+          onViewportEnter={() => setStampPlaying(true)}
           viewport={{ once: true, amount: 0.6 }}
-          poster="/brand/stamp-poster.jpg"
           aria-hidden="true"
-          muted
-          playsInline
-          preload="auto"
-          className="col-span-12 block w-full border border-hairline md:col-span-5 md:col-start-8"
+          className="col-span-12 md:col-span-5 md:col-start-8"
         >
-          <source src="/brand/stamp.mp4" type="video/mp4" />
-          <source src="/brand/stamp.webm" type="video/webm" />
-        </MotionVideo>
+          {/* Sob prefers-reduced-motion o vídeo nem chega a ser montado: fica
+              o relevo seco parado, que é o fim do gesto e o único quadro sem
+              a sombra cortada pela borda. Também poupa o download do clipe
+              para quem pediu para não ter movimento. */}
+          {reduceMotion ? (
+            <Image
+              src="/brand/stamp-still.webp"
+              alt=""
+              width={608}
+              height={464}
+              className="block h-auto w-full"
+            />
+          ) : (
+            <AlphaMatteVideo
+              src="/brand/stamp.mp4"
+              poster="/brand/stamp-poster.webp"
+              width={608}
+              height={464}
+              loop={false}
+              playing={stampPlaying}
+            />
+          )}
+        </motion.div>
       </motion.div>
 
       <motion.div
@@ -161,11 +176,11 @@ export function Services() {
                 <span className="font-display text-lg text-ink-muted transition-colors duration-400 group-hover:text-cream md:col-span-1">
                   {service.number}
                 </span>
-                <h3 className="font-display text-xl text-ink transition-colors duration-400 group-hover:text-cream md:col-span-4">
+                <h3 className="font-display text-xl text-wine-bright transition-colors duration-400 group-hover:text-cream md:col-span-4">
                   {service.title}
                 </h3>
                 <div className="col-span-2 md:col-span-7 md:col-start-6">
-                  <p className="font-accent text-md text-wine italic transition-colors duration-400 group-hover:text-cream">
+                  <p className="font-accent text-md text-wine-bright italic transition-colors duration-400 group-hover:text-cream">
                     {service.opener}
                   </p>
                   <p className="mt-3 max-w-md font-sans text-base font-light text-ink-muted transition-colors duration-400 group-hover:text-cream">

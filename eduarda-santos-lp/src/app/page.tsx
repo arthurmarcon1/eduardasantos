@@ -12,6 +12,11 @@ import { Value } from "@/components/sections/value";
 // como continuação direta da tese ("é o que sobra depois" → "por que
 // sobra"), antes de qualquer credencial — ver autocrítica no histórico do
 // projeto.
+//
+// O convite ("Vamos tirar sua marca do automático?") vem antes das dúvidas,
+// não depois: quem já se convenceu segue direto para a conversa, e quem
+// ainda tem ressalvas encontra o FAQ logo abaixo, com um segundo botão no
+// fim dele para não precisar rolar de volta.
 export default function Home() {
   return (
     <>
@@ -21,8 +26,8 @@ export default function Home() {
       <Services />
       <Pricing />
       <Needs />
-      <Faq />
       <CallToAction />
+      <Faq />
     </>
   );
 }

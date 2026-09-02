@@ -8,7 +8,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { buttonVariants } from "@/components/ui/button";
 import { useFadeInStagger } from "@/lib/motion";
+import { WHATSAPP_URL } from "@/lib/constants";
 
 const QUESTIONS = [
   {
@@ -60,7 +62,7 @@ export function Faq() {
         <motion.h2
           variants={fadeItem}
           transition={itemTransition}
-          className="mt-4 font-display text-3xl tracking-tightest text-ink"
+          className="mt-4 font-display text-3xl tracking-tightest text-wine-bright"
         >
           Ficou com alguma dúvida?
         </motion.h2>
@@ -86,6 +88,25 @@ export function Faq() {
             </motion.div>
           ))}
         </Accordion>
+
+        {/* Segundo convite. O primeiro está na seção logo acima; quem desceu
+            até aqui para tirar uma dúvida terminaria a página sem nenhuma
+            ação à mão, e o FAQ é a última seção antes do rodapé. */}
+        <motion.div
+          variants={fadeItem}
+          transition={itemTransition}
+          className="mt-16"
+        >
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chamar Eduarda Santos no WhatsApp (abre em nova aba)"
+            className={buttonVariants({ variant: "default" })}
+          >
+            Vamos conversar
+          </a>
+        </motion.div>
       </motion.div>
     </section>
   );

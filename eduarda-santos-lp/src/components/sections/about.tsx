@@ -110,7 +110,7 @@ export function About() {
             transition={itemTransition}
             className="md:col-span-7"
           >
-            <h2 className="font-display text-xl tracking-tightest text-ink">
+            <h2 className="font-display text-xl tracking-tightest text-wine-bright">
               Sou a Eduarda.
             </h2>
 
@@ -130,7 +130,7 @@ export function About() {
               ideias em estratégias, conteúdos e campanhas que fazem sentido
               para cada realidade.
             </p>
-            <p className="mt-5 max-w-prose font-accent text-lg text-wine italic">
+            <p className="mt-5 max-w-prose font-accent text-lg text-wine-bright italic">
               Antes de pensar no que postar, eu penso no porquê.
             </p>
             <p className="mt-5 max-w-prose font-sans text-base leading-body font-light text-ink">
@@ -141,7 +141,7 @@ export function About() {
 
             <div className="mt-10 flex items-center justify-end gap-4">
               <span aria-hidden="true" className="h-px w-10 bg-hairline" />
-              <p className="font-accent text-lg text-wine italic">
+              <p className="font-accent text-lg text-wine-bright italic">
                 criatividade &amp; comunicação
               </p>
             </div>

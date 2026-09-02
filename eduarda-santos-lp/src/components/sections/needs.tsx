@@ -59,7 +59,7 @@ export function Needs() {
         <motion.h2
           variants={item}
           transition={itemTransition}
-          className="font-display text-3xl tracking-tightest text-ink"
+          className="font-display text-3xl tracking-tightest text-wine-bright"
         >
           O que sua marca precisa agora?
         </motion.h2>
@@ -89,7 +89,7 @@ export function Needs() {
           >
             <div className="mx-auto max-w-site px-6 md:px-10">
               <div className="grid grid-cols-1 gap-x-8 gap-y-4 py-12 md:grid-cols-12 md:py-16">
-                <p className="max-w-[20ch] font-accent text-lg text-wine italic md:col-span-4">
+                <p className="max-w-[20ch] font-accent text-lg text-wine-bright italic md:col-span-4">
                   {need.quote}
                 </p>
 
@@ -128,19 +128,23 @@ export function Needs() {
           transition={itemTransition}
           className="mx-auto max-w-prose font-sans text-base font-light text-ink"
         >
-          Se você se identificou com alguma dessas situações, talvez seja
-          hora de conversar.
+          Se você se identificou com alguma dessas situações, talvez seja hora
+          de conversar.
         </motion.p>
         <motion.p
           variants={item}
           transition={itemTransition}
           className="mx-auto mt-2 max-w-prose font-sans text-base font-light text-ink-muted"
         >
-          Você não precisa chegar sabendo exatamente do que precisa. Eu te
-          ajudo a encontrar o melhor caminho.
+          Você não precisa chegar sabendo exatamente do que precisa. Eu te ajudo
+          a encontrar o melhor caminho.
         </motion.p>
 
-        <motion.div variants={item} transition={itemTransition} className="mt-10">
+        <motion.div
+          variants={item}
+          transition={itemTransition}
+          className="mt-10"
+        >
           <a
             href={WHATSAPP_URL}
             target="_blank"
