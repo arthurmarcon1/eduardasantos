@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import { buttonVariants } from "@/components/ui/button";
+import { WHATSAPP_URL } from "@/lib/constants";
 import { useFadeInStagger } from "@/lib/motion";
 
 /**
@@ -143,7 +144,10 @@ export function Hero() {
               className="mt-8 flex flex-wrap items-center gap-x-10 gap-y-4"
             >
               <a
-                href="#contato"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chamar Eduarda Santos no WhatsApp (abre em nova aba)"
                 className={buttonVariants({ variant: "default" })}
               >
                 Vamos conversar

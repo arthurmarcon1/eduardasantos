@@ -1,7 +1,18 @@
 import { Monogram } from "@/components/monogram";
 import { Signature } from "@/components/signature";
+import {
+  INSTAGRAM_URL,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
+} from "@/lib/constants";
 
 const CONTACT_LINKS = [
+  {
+    label: `WhatsApp ${WHATSAPP_DISPLAY}`,
+    href: WHATSAPP_URL,
+    ariaLabel: "Chamar Eduarda Santos no WhatsApp (abre em nova aba)",
+    external: true,
+  },
   {
     label: "eduardasan2207@gmail.com",
     href: "mailto:eduardasan2207@gmail.com",
@@ -9,23 +20,18 @@ const CONTACT_LINKS = [
     external: false,
   },
   {
-    label: "Instagram",
-    href: "https://instagram.com/eduardasantos",
+    label: "@dudasantosmes",
+    href: INSTAGRAM_URL,
     ariaLabel: "Instagram de Eduarda Santos (abre em nova aba)",
-    external: true,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/eduardasantos",
-    ariaLabel: "LinkedIn de Eduarda Santos (abre em nova aba)",
     external: true,
   },
 ];
 
 export function Footer() {
   return (
-    // #contato mora na section de CTA final (call-to-action.tsx), não aqui —
-    // é ela que serve de alvo para os links "Vamos conversar" do site.
+    // #contato mora na section de CTA final (call-to-action.tsx), não aqui.
+    // Todo botão "Vamos conversar" do site abre o WhatsApp direto
+    // (WHATSAPP_URL em @/lib/constants).
     <footer className="bg-wine text-cream">
       <div className="mx-auto flex max-w-site flex-col items-center gap-10 px-6 py-28 text-center md:px-10 md:py-36">
         <Monogram className="h-14" />

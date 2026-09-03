@@ -5,6 +5,7 @@ import { Dialog } from "@base-ui/react/dialog";
 
 import { Monogram } from "@/components/monogram";
 import { buttonVariants } from "@/components/ui/button";
+import { WHATSAPP_URL } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
@@ -69,7 +70,10 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#contato"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chamar Eduarda Santos no WhatsApp (abre em nova aba)"
               className={buttonVariants({
                 variant: "outline-wine",
                 size: "sm",
@@ -115,7 +119,10 @@ export function Header() {
                 </a>
               ))}
               <a
-                href="#contato"
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chamar Eduarda Santos no WhatsApp (abre em nova aba)"
                 onClick={() => setMenuOpen(false)}
                 className="font-display text-xl text-wine transition-colors hover:text-wine-hover"
               >
